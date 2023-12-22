@@ -1,9 +1,6 @@
 package com.basic;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SortHashMapByValue {
     public static void main(String[] args) {
@@ -16,6 +13,12 @@ public class SortHashMapByValue {
         List<Map.Entry<String, String>> list = new ArrayList<>(map.entrySet());
         list.sort((x,y) -> x.getValue().compareTo(y.getValue()));
         list.forEach((x)->System.out.println(x.getValue() + " " ));
+
+        HashMap<String, String> sortedmap = new LinkedHashMap<>();
+        for(Map.Entry<String,String> value : list){
+            sortedmap.put(value.getKey(), value.getValue());
+        }
+        sortedmap.entrySet().forEach(x-> System.out.println("Value is : "+x.getValue()));
 
     }
 }

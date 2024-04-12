@@ -71,22 +71,46 @@ public class LinkedListExample {
                 prev.next = curr.next;
                 // Display the message
                 System.out.println(data + " found and deleted");
-            }else{
+            } else {
                 // Display the message
                 System.out.println(data + " not found");
             }
         }
     }
 
+    private void deleteAt(int pos) {
+        int counter = 2;
+        if (pos == 1) {
+            head = head.next;
+        } else {
+            Node prev = head;
+            Node curr = head.next;
+            while (curr != null && counter != pos) {
+                prev = curr;
+                curr = curr.next;
+                counter++;
+            }
+
+            if (curr != null) {
+                prev.next = curr.next;
+                System.out.println("Element deleted");
+            } else {
+                System.out.println("Element not found at given index");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         LinkedListExample ex = new LinkedListExample();
-        ex.add(2);
-        ex.add(4);
-        ex.add(10);
         ex.add(1);
+        ex.add(2);
+        ex.add(3);
+        ex.add(4);
+        ex.add(5);
         ex.printList();
 
-        ex.delete(10);
+        //ex.delete(10);
+        ex.deleteAt(5);
         ex.printList();
     }
 }

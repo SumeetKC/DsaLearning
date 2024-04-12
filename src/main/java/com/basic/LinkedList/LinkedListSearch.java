@@ -4,6 +4,8 @@ public class LinkedListSearch {
 
     Node head;
 
+    int lengthR = 0;
+
     class Node {
         int data;
         Node next;
@@ -31,7 +33,7 @@ public class LinkedListSearch {
     /**
      * Initialize a node pointer, current = head.
      * Do following while current is not NULL
-     *  If the current value (i.e., current->key) is equal to the key being searched return true.
+     * If the current value (i.e., current->key) is equal to the key being searched return true.
      * Otherwise, move to the next node (current = current->next).
      * If the key is not found, return false
      */
@@ -54,15 +56,34 @@ public class LinkedListSearch {
      * If the head is NULL, return false.
      * If the head’s key is the same as X, return true;
      * Else recursively search in the next node.
-    */
+     */
     public boolean findRecursive(Node head, int key) {
         if (head == null) {
             return false;
         }
-        if(head.data == key)
+        if (head.data == key)
             return true;
 
         return findRecursive(head.next, key);
+    }
+
+    public int lengthIterative() {
+        int length = 0;
+        Node n = head;
+        while (n != null) {
+            length++;
+            n = n.next;
+        }
+        return length;
+    }
+
+    public int lengthRecursive(Node head) {
+
+        if (head == null) {
+            return lengthR;
+        }
+        lengthR++;
+        return lengthRecursive(head.next);
     }
 
     public static void main(String[] args) {
@@ -74,15 +95,19 @@ public class LinkedListSearch {
         linkedList.add(4);
         linkedList.add(6);
 
+        System.out.println("The length of linked list (Iterative) is " + linkedList.lengthIterative());
+
+        System.out.println("The length of linked list is (Recursive) is " + linkedList.lengthRecursive(linkedList.head));
+
         if (linkedList.findIterative(5)) {
             System.out.println("The Element is present with Iterative Approach");
-        }else{
+        } else {
             System.out.println("The Element is not present with Iterative Approach");
         }
 
         if (linkedList.findRecursive(linkedList.head, 5)) {
             System.out.println("The Element is present with Recursive Approach");
-        }else{
+        } else {
             System.out.println("The Element is not present with Recursive Approach");
         }
     }

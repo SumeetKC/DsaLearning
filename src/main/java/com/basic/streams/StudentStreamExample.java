@@ -84,8 +84,12 @@ public class StudentStreamExample {
 
         //Find the student who has second rank
         Student secondRank = list.stream().sorted(Comparator.comparing(Student::getRank)).skip(1).findFirst().get();
-        System.out.println(secondRank.getFirstName() + " " + secondRank.getRank());
+        //System.out.println(secondRank.getFirstName() + " " + secondRank.getRank());
 
+        //Partition students based on whether their rank is greater than 200
+        Map<Boolean, List<Student>> stdntPartition =  list.stream().collect(Collectors.partitioningBy(x -> x.getRank() > 200));
+        stdntPartition.get(true).forEach(x -> System.out.println(x.getFirstName() + " " + x.getRank()));
+        stdntPartition.get(false).forEach(x -> System.out.println(x.getFirstName() + " " + x.getRank()));
 
 
     }
